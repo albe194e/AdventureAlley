@@ -89,4 +89,9 @@ public class TestRestController {
         return userService.userRepo.findAll();
     }
 
+    @GetMapping("/customers")
+    public List<Customer> customers() {
+        return customerService.customerRepo.findAll();
+    }
+
 }
