@@ -1,6 +1,8 @@
 package com.example.adventurealley.Models.Products;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
 @Entity
@@ -8,9 +10,10 @@ public class Product {
 
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int productId;
 
-    String name, ageLimit;
+    private String name, ageLimit;
 
     private Type type;
 
