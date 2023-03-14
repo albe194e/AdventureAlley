@@ -4,25 +4,30 @@ import com.example.adventurealley.Models.Customer;
 import com.example.adventurealley.Models.Products.Product;
 import com.example.adventurealley.Models.Products.Type;
 import com.example.adventurealley.Models.Reservation;
-import com.example.adventurealley.Repositories.CustomerRepo;
-import com.example.adventurealley.Repositories.ProductRepo;
-import com.example.adventurealley.Repositories.ReservationRepo;
+import com.example.adventurealley.Models.User;
+import com.example.adventurealley.Service.CustomerService;
+import com.example.adventurealley.Service.ProductService;
+import com.example.adventurealley.Service.ReservationService;
+import com.example.adventurealley.Service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
+import java.util.List;
 
 @RestController
 public class TestRestController {
 
     @Autowired
-    CustomerRepo customerRepo;
+    CustomerService customerService;
     @Autowired
-    ProductRepo productRepo;
+    ProductService productService;
     @Autowired
-    ReservationRepo reservationRepo;
+    ReservationService reservationService;
+
+    @Autowired
+    UserService userService;
 
     @GetMapping("/test")
     public ArrayList<Object> initData() {
@@ -52,9 +57,9 @@ public class TestRestController {
         reservations.add(reservation);
         customer.setReservations(reservations);
 
-        customerRepo.save(customer);
-        productRepo.save(product);
-        reservationRepo.save(reservation);
+        customerService.customerRepo.save(customer);
+        productService.productRepo.save(product);
+        reservationService.reservationRepo.save(reservation);
 
         ArrayList<Object> objects = new ArrayList<>();
         objects.add(customer);
@@ -62,6 +67,11 @@ public class TestRestController {
         objects.add(reservation);
         return objects;
 
+    }
+
+    @GetMapping("/users")
+    public List<User> users() {
+        return userService.userRepo.findAll();
     }
 
 }
