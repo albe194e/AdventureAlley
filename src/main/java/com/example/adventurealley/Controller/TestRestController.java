@@ -5,6 +5,7 @@ import com.example.adventurealley.Models.Products.Product;
 import com.example.adventurealley.Models.Products.Type;
 import com.example.adventurealley.Models.Reservation;
 import com.example.adventurealley.Models.User;
+import com.example.adventurealley.Models.UserType;
 import com.example.adventurealley.Service.CustomerService;
 import com.example.adventurealley.Service.ProductService;
 import com.example.adventurealley.Service.ReservationService;
@@ -36,6 +37,16 @@ public class TestRestController {
         Reservation reservation = new Reservation();
         Product product = new Product();
 
+        User admin = new User();
+        admin.setUsername("admin");
+        admin.setPassword("1234");
+        admin.setUserType(UserType.ADMIN);
+
+        User employee = new User();
+        employee.setUsername("employee");
+        employee.setPassword("1234");
+        employee.setUserType(UserType.EMPLOYEE);
+
         customer.setFirstName("Albert");
         customer.setLastName("Einstein");
         customer.setPhone("12345678");
@@ -60,6 +71,8 @@ public class TestRestController {
         customerService.customerRepo.save(customer);
         productService.productRepo.save(product);
         reservationService.reservationRepo.save(reservation);
+        userService.userRepo.save(admin);
+        userService.userRepo.save(employee);
 
         ArrayList<Object> objects = new ArrayList<>();
         objects.add(customer);
