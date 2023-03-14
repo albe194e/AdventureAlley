@@ -18,6 +18,8 @@ public class Customer {
 
     private String firstName, lastName, email, phone, address;
 
+    private String username, password;
+
     @OneToMany(mappedBy = "customer")
     private List<Reservation> reservations = new ArrayList<>();
 
@@ -25,6 +27,22 @@ public class Customer {
 
     public int getCustomerId() {
         return customerId;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public void setCustomerId(int customerId) {

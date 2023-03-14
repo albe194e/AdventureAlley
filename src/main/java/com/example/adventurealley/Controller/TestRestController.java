@@ -52,6 +52,8 @@ public class TestRestController {
         customer.setPhone("12345678");
         customer.setEmail("gmail@");
         customer.setAddress("Albertsvej 1");
+        customer.setUsername("albert");
+        customer.setPassword("1234");
 
         reservation.setStartTime("12:00");
         reservation.setEndTime("13:00");
