@@ -20,8 +20,6 @@ public class Customer {
 
     private String username, password;
 
-    @OneToMany(mappedBy = "customer")
-    private List<Reservation> reservations = new ArrayList<>();
 
     public Customer() {}
 
@@ -89,11 +87,5 @@ public class Customer {
         this.address = address;
     }
 
-    public List<Reservation> getReservations() {
-        return reservations;
-    }
 
-    public void setReservations(List<Reservation> reservations) {
-        this.reservations = reservations;
-    }
 }

@@ -11,12 +11,14 @@ import com.example.adventurealley.Service.ProductService;
 import com.example.adventurealley.Service.ReservationService;
 import com.example.adventurealley.Service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@CrossOrigin
 @RestController
 public class TestRestController {
 
@@ -68,7 +70,6 @@ public class TestRestController {
 
         ArrayList<Reservation> reservations = new ArrayList<>();
         reservations.add(reservation);
-        customer.setReservations(reservations);
 
         customerService.customerRepo.save(customer);
         productService.productRepo.save(product);
