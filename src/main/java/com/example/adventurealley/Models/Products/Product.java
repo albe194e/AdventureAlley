@@ -17,6 +17,8 @@ public class Product {
 
     private Type type;
 
+    private double price;
+
     public Product() {}
 
     public int getProductId() {
@@ -49,5 +51,13 @@ public class Product {
 
     public void setType(Type type) {
         this.type = type;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
     }
 }

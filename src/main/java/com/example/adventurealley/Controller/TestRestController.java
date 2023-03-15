@@ -11,7 +11,9 @@ import com.example.adventurealley.Service.ProductService;
 import com.example.adventurealley.Service.ReservationService;
 import com.example.adventurealley.Service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -63,7 +65,8 @@ public class TestRestController {
         product.setName("Bungee Jump");
         product.setType(Type.ACTIVITY);
         product.setAgeLimit("18+");
-
+        product.setPrice(500.5);
+        System.out.println(product);
         reservation.setProduct(product);
         reservation.setCustomer(customer);
 
@@ -93,6 +96,11 @@ public class TestRestController {
     @GetMapping("/customers")
     public List<Customer> customers() {
         return customerService.customerRepo.findAll();
+    }
+
+    @GetMapping("/products")
+    public List<Product> products() {
+        return productService.productRepo.findAll();
     }
 
     @PostMapping("/validateCustomerLogin")
