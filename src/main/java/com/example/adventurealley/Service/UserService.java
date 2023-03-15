@@ -14,10 +14,8 @@ public class UserService {
     public UserRepo userRepo;
 
 
-    public Optional<User> findUser(User user){
+    public Optional<User> findUser(String username, String password) {
 
-        String username = user.getUsername();
-        String password = user.getPassword();
 
         return userRepo.findByUsernameAndPassword(username, password);
 
@@ -47,7 +45,9 @@ public class UserService {
 
         String username = user.getUsername();
 
-        if (!checkIfUserExists(username)) {
+        if (checkIfUserExists(username)) {
+            System.out.println("User already exists");
+        } else {
             userRepo.save(user);
         }
 
@@ -55,6 +55,7 @@ public class UserService {
 
     public boolean checkIfUserExists(String username) {
         User user = userRepo.findByUsername(username);
+
         return user != null;
     }
 }

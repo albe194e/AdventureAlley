@@ -112,7 +112,10 @@ public class TestRestController {
     @PostMapping("/validateUserLogin")
     public User login(@RequestBody User user) {
 
-        Optional<User> userOptional = userService.findUser(user);
+        String username = user.getUsername();
+        String password = user.getPassword();
+
+        Optional<User> userOptional = userService.findUser(username, password);
 
         System.out.println(userOptional.isPresent());
 
