@@ -11,12 +11,11 @@ import com.example.adventurealley.Service.ProductService;
 import com.example.adventurealley.Service.ReservationService;
 import com.example.adventurealley.Service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @CrossOrigin
 @RestController
@@ -90,9 +89,32 @@ public class TestRestController {
         return userService.userRepo.findAll();
     }
 
+
     @GetMapping("/customers")
     public List<Customer> customers() {
         return customerService.customerRepo.findAll();
+    }
+
+    @PostMapping("/validateCustomerLogin")
+    public boolean login(@RequestBody Customer customer) {
+
+        Optional<Customer> customerOptional = customerService.findCustomer(customer);
+
+        return customerOptional.isPresent();
+    }
+
+    @PostMapping("/validateUserLogin")
+    public User login(@RequestBody User user) {
+
+        Optional<User> userOptional = userService.findUser(user);
+
+        System.out.println(userOptional.isPresent());
+
+        return userOptional.orElse(null);
+    }
+    @GetMapping("/user/{username}")
+    public User getUser(@PathVariable String username) {
+        return userService.findUserByUsername(username);
     }
 
 }

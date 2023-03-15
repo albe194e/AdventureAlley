@@ -1,10 +1,7 @@
 package com.example.adventurealley.Models;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 
-import java.util.ArrayList;
-import java.util.List;
 
 
 @Entity
@@ -19,6 +16,7 @@ public class Customer {
     private String firstName, lastName, email, phone, address;
 
     private String username, password;
+
 
 
     public Customer() {}
