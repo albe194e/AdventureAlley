@@ -64,7 +64,8 @@ public class TestRestController {
         product.setName("Bungee Jump");
         product.setType(Type.ACTIVITY);
         product.setAgeLimit("18+");
-
+        product.setPrice(500.5);
+        System.out.println(product);
         reservation.setProduct(product);
         reservation.setCustomer(customer);
 
@@ -93,6 +94,11 @@ public class TestRestController {
     @GetMapping("/customers")
     public List<Customer> customers() {
         return customerService.customerRepo.findAll();
+    }
+
+    @GetMapping("/products")
+    public List<Product> products() {
+        return productService.productRepo.findAll();
     }
 
 }
