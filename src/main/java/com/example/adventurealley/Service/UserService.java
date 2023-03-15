@@ -27,4 +27,34 @@ public class UserService {
 
         return userRepo.findByUsername(username);
     }
+
+    public void deleteUser(int id) {
+        userRepo.deleteById(id);
+    }
+
+    public void updateUser(int id, User newUser) {
+
+        User user = userRepo.findById(id).get();
+
+        user.setUsername(newUser.getUsername());
+        user.setUserType(newUser.getUserType());
+
+        userRepo.save(user);
+
+    }
+
+    public void createUser(User user) {
+
+        String username = user.getUsername();
+
+        if (!checkIfUserExists(username)) {
+            userRepo.save(user);
+        }
+
+    }
+
+    public boolean checkIfUserExists(String username) {
+        User user = userRepo.findByUsername(username);
+        return user != null;
+    }
 }
