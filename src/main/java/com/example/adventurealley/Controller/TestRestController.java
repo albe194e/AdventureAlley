@@ -135,6 +135,14 @@ public class TestRestController {
         return userService.findUserByUsername(username);
     }
 
+    @PostMapping("/createCustomer")
+    public void CreateCustomer(@RequestBody Customer customer) {
+        customerService.customerRepo.save(customer);
+    }
 
+    @PutMapping("/updateCustomer")
+    public void updateCustomer(@RequestBody Customer customer) {
+        customerService.customerRepo.save(customer);
+    }
 
 }
