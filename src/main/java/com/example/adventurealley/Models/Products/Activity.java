@@ -1,7 +1,10 @@
 package com.example.adventurealley.Models.Products;
 
+import com.example.adventurealley.Models.Customer;
 import com.example.adventurealley.Models.TimeSlot;
 import jakarta.persistence.*;
+
+import java.sql.Time;
 
 @Entity
 public class Activity {
@@ -12,26 +15,15 @@ public class Activity {
 
     private String name, ageLimit;
 
-
     private double price;
 
     @OneToOne
     @JoinColumn(name = "equipmentID", referencedColumnName = "equipmentID")
     private Equipment equipment;
 
-    @ManyToOne
-    @JoinColumn(name = "timeslotId", referencedColumnName = "infoId")
-    private TimeSlot timeSlot;
 
     public Activity() {}
 
-    public TimeSlot getTimeSlot() {
-        return timeSlot;
-    }
-
-    public void setTimeSlot(TimeSlot timeSlot) {
-        this.timeSlot = timeSlot;
-    }
 
     public int getActivityId() {
         return activityId;

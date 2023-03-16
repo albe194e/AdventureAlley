@@ -31,7 +31,6 @@ public class TestRestController {
 
     @GetMapping("/test")
     public ArrayList<Object> initData() {
-
         Customer customer = new Customer();
         Reservation reservation = new Reservation();
         Activity activity = new Activity();
@@ -56,13 +55,9 @@ public class TestRestController {
         customer.setUsername("albert");
         customer.setPassword("1234");
 
-
-
         timeSlot.setStartTime("12:00");
         timeSlot.setEndTime("13:00");
         timeSlot.setDate("2021-05-05");
-
-
 
 
         equipment.setName("Bungee Equipment");
@@ -71,21 +66,24 @@ public class TestRestController {
         activity.setName("Bungee Jump");
         activity.setAgeLimit("18+");
         activity.setPrice(500.5);
+        equipmentService.equipmentRepo.save(equipment);
         activity.setEquipment(equipment);
 
-        timeSlot.getActivities().add(activity);
+        activityService.activityRepo.save(activity);
 
+        timeSlot.setActivity(activity);
         timeSlotService.timeSlotRepo.save(timeSlot);
+
 
         reservation.setInfo(timeSlot);
 
-        activity.setTimeSlot(timeSlot);
 
         reservation.setCustomer(customer);
 
-        equipmentService.equipmentRepo.save(equipment);
+
+
         customerService.customerRepo.save(customer);
-        activityService.activityRepo.save(activity);
+
         userService.userRepo.save(admin);
         userService.userRepo.save(employee);
         reservationService.reservationRepo.save(reservation);

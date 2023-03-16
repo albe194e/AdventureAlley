@@ -14,18 +14,26 @@ public class TimeSlot {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int infoId;
 
-    @OneToMany(mappedBy = "timeSlot")
-    @JsonBackReference
-    private Set<Activity> activities = new HashSet<>();
+    @ManyToOne
+    @JoinColumn(name = "activityId", referencedColumnName = "activityId")
+    private Activity activity;
 
     private String date, startTime, endTime;
 
-    public Set<Activity> getActivities() {
-        return activities;
+    public Activity getActivity() {
+        return activity;
     }
 
-    public void setActivities(Set<Activity> activities) {
-        this.activities = activities;
+    public int getInfoId() {
+        return infoId;
+    }
+
+    public void setInfoId(int infoId) {
+        this.infoId = infoId;
+    }
+
+    public void setActivity(Activity activity) {
+        this.activity = activity;
     }
 
     public String getDate() {
