@@ -21,4 +21,19 @@ public class CustomerService {
         return customerRepo.findByUsernameAndPassword(username, password);
 
     }
+
+    public void updateCustomer(int id, Customer newCustomer) {
+        Customer customer = customerRepo.findById(id).get();
+
+        customer.setPassword(newCustomer.getPassword());
+        customer.setAddress(newCustomer.getAddress());
+        customer.setEmail(newCustomer.getEmail());
+        customer.setPhone(newCustomer.getPhone());
+
+        customerRepo.save(customer);
+    }
+
+    public void deleteCustomer(int id) {
+        customerRepo.deleteById(id);
+    }
 }
