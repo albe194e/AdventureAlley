@@ -22,6 +22,11 @@ public class User {
         this.password = password;
         this.userType = userType;
     }
+    public User(String username, String password, UserType userType) {
+        this.username = username;
+        this.password = password;
+        this.userType = userType;
+    }
 
     public int getUserId() {
         return userId;
