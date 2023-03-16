@@ -31,7 +31,6 @@ public class TestRestController {
 
     @GetMapping("/test")
     public ArrayList<Object> initData() {
-
         Customer customer = new Customer();
         Reservation reservation = new Reservation();
         Activity activity = new Activity();
@@ -140,9 +139,13 @@ public class TestRestController {
         customerService.customerRepo.save(customer);
     }
 
-    @PutMapping("/updateCustomer")
-    public void updateCustomer(@RequestBody Customer customer) {
-        customerService.customerRepo.save(customer);
+    @PutMapping("/updateCustomer/{id}")
+    public void updateCustomer(@PathVariable int id, @RequestBody Customer customer) {
+        customerService.updateCustomer(id, customer);
     }
 
+    @DeleteMapping("/deleteCustomer/{id}")
+    public void deleteCustomer(@PathVariable int id) {
+        customerService.deleteCustomer(id);
+    }
 }
