@@ -34,7 +34,6 @@ public class TestRestController {
 
     @GetMapping("/test")
     public ArrayList<Object> initData() {
-
         Customer customer = new Customer();
         Reservation reservation = new Reservation();
         Product product = new Product();
