@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @CrossOrigin
 @RestController
 public class AdminRestController {
@@ -30,5 +32,9 @@ public class AdminRestController {
 
         userService.createUser(user);
 
+    }
+    @GetMapping("/users")
+    public List<User> users() {
+        return userService.userRepo.findAll();
     }
 }

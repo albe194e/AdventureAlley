@@ -100,12 +100,6 @@ public class TestRestController {
 
     }
 
-    @GetMapping("/users")
-    public List<User> users() {
-        return userService.userRepo.findAll();
-    }
-
-
     @GetMapping("/customers")
     public List<Customer> customers() {
         return customerService.customerRepo.findAll();
