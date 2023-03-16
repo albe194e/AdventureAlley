@@ -3,7 +3,6 @@ package com.example.adventurealley.Controller;
 import com.example.adventurealley.Models.User;
 import com.example.adventurealley.Service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -11,6 +10,7 @@ import java.util.List;
 @CrossOrigin
 @RestController
 public class AdminRestController {
+
 
 
     @Autowired
@@ -29,6 +29,8 @@ public class AdminRestController {
     }
     @PostMapping("/createUser")
     public void createUser(@RequestBody User user) {
+
+        System.out.println(user.getUsername());
 
         userService.createUser(user);
 
