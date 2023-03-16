@@ -1,13 +1,14 @@
 package com.example.adventurealley.Models.Products;
 
+import com.example.adventurealley.Models.TimeSlot;
 import jakarta.persistence.*;
 
 @Entity
-public class Product {
+public class Activity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int productId;
+    private int activityId;
 
     private String name, ageLimit;
 
@@ -18,14 +19,26 @@ public class Product {
     @JoinColumn(name = "equipmentID", referencedColumnName = "equipmentID")
     private Equipment equipment;
 
-    public Product() {}
+    @ManyToOne
+    @JoinColumn(name = "timeslotId", referencedColumnName = "infoId")
+    private TimeSlot timeSlot;
 
-    public int getProductId() {
-        return productId;
+    public Activity() {}
+
+    public TimeSlot getTimeSlot() {
+        return timeSlot;
     }
 
-    public void setProductId(int productId) {
-        this.productId = productId;
+    public void setTimeSlot(TimeSlot timeSlot) {
+        this.timeSlot = timeSlot;
+    }
+
+    public int getActivityId() {
+        return activityId;
+    }
+
+    public void setActivityId(int activityId) {
+        this.activityId = activityId;
     }
 
     public String getName() {
