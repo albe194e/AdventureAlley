@@ -1,15 +1,13 @@
 package com.example.adventurealley.Controller;
 
 import com.example.adventurealley.Models.Customer;
+import com.example.adventurealley.Models.Products.Equipment;
 import com.example.adventurealley.Models.Products.Product;
-import com.example.adventurealley.Models.Products.Type;
 import com.example.adventurealley.Models.Reservation;
 import com.example.adventurealley.Models.User;
 import com.example.adventurealley.Models.UserType;
-import com.example.adventurealley.Service.CustomerService;
-import com.example.adventurealley.Service.ProductService;
-import com.example.adventurealley.Service.ReservationService;
-import com.example.adventurealley.Service.UserService;
+import com.example.adventurealley.Repositories.EquipmentRepo;
+import com.example.adventurealley.Service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -31,12 +29,16 @@ public class TestRestController {
     @Autowired
     UserService userService;
 
+    @Autowired
+    EquipmentService equipmentService;
+
     @GetMapping("/test")
     public ArrayList<Object> initData() {
 
         Customer customer = new Customer();
         Reservation reservation = new Reservation();
         Product product = new Product();
+        Equipment equipment = new Equipment();
 
         User admin = new User();
         admin.setUsername("admin");
@@ -56,31 +58,38 @@ public class TestRestController {
         customer.setUsername("albert");
         customer.setPassword("1234");
 
+
         reservation.setStartTime("12:00");
         reservation.setEndTime("13:00");
         reservation.setDate("2021-05-05");
 
+        equipment.setName("Bungee Equipment");
+        equipment.setStock(4);
+
         product.setName("Bungee Jump");
-        product.setType(Type.ACTIVITY);
         product.setAgeLimit("18+");
         product.setPrice(500.5);
-        System.out.println(product);
+        product.setEquipment(equipment);
+
+
+
         reservation.setProduct(product);
         reservation.setCustomer(customer);
 
-        ArrayList<Reservation> reservations = new ArrayList<>();
-        reservations.add(reservation);
-
+        equipmentService.equipmentRepo.save(equipment);
         customerService.customerRepo.save(customer);
         productService.productRepo.save(product);
-        reservationService.reservationRepo.save(reservation);
         userService.userRepo.save(admin);
         userService.userRepo.save(employee);
+        reservationService.reservationRepo.save(reservation);
+
+
 
         ArrayList<Object> objects = new ArrayList<>();
         objects.add(customer);
         objects.add(product);
         objects.add(reservation);
+        objects.add(equipment);
         return objects;
 
     }
@@ -122,5 +131,7 @@ public class TestRestController {
     public User getUser(@PathVariable String username) {
         return userService.findUserByUsername(username);
     }
+
+
 
 }

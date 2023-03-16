@@ -1,13 +1,9 @@
 package com.example.adventurealley.Models.Products;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 @Entity
 public class Product {
-
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -15,9 +11,12 @@ public class Product {
 
     private String name, ageLimit;
 
-    private Type type;
 
     private double price;
+
+    @OneToOne
+    @JoinColumn(name = "equipmentID", referencedColumnName = "equipmentID")
+    private Equipment equipment;
 
     public Product() {}
 
@@ -45,13 +44,9 @@ public class Product {
         this.ageLimit = ageLimit;
     }
 
-    public Type getType() {
-        return type;
-    }
 
-    public void setType(Type type) {
-        this.type = type;
-    }
+
+
 
     public double getPrice() {
         return price;
@@ -59,5 +54,18 @@ public class Product {
 
     public void setPrice(double price) {
         this.price = price;
+    }
+
+    public Equipment getEquipment() {
+        return equipment;
+    }
+
+    public void setEquipment(Equipment equipment) {
+        this.equipment = equipment;
+    }
+
+    @Override
+    public String toString() {
+        return super.toString();
     }
 }

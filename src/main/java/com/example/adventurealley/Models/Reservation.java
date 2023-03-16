@@ -8,8 +8,8 @@ import jakarta.persistence.*;
 public class Reservation {
 
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int reservationId;
     @ManyToOne
     @JoinColumn(name = "customerId", referencedColumnName = "customerId")
@@ -19,7 +19,6 @@ public class Reservation {
     private String date, startTime, endTime;
 
     @OneToOne
-    @MapsId
     @JoinColumn(name = "productId", referencedColumnName = "productId")
     private Product product;
 
@@ -29,6 +28,7 @@ public class Reservation {
     public int getReservationId() {
         return reservationId;
     }
+
 
     public void setReservationId(int reservationId) {
         this.reservationId = reservationId;
@@ -72,5 +72,9 @@ public class Reservation {
 
     public void setProduct(Product product) {
         this.product = product;
+    }
+
+    public void setReservationID(int reservationId) {
+        this.reservationId = reservationId;
     }
 }

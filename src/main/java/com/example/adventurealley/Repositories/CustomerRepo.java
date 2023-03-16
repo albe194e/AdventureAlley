@@ -7,4 +7,5 @@ import java.util.Optional;
 
 public interface CustomerRepo extends JpaRepository<Customer,Integer> {
     Optional<Customer> findByUsernameAndPassword(String username, String password);
+
 }
