@@ -1,16 +1,19 @@
 package com.example.adventurealley.Models.Products;
 
+import com.example.adventurealley.Models.Customer;
+import com.example.adventurealley.Models.TimeSlot;
 import jakarta.persistence.*;
 
+import java.sql.Time;
+
 @Entity
-public class Product {
+public class Activity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int productId;
+    private int activityId;
 
     private String name, ageLimit;
-
 
     private double price;
 
@@ -18,14 +21,16 @@ public class Product {
     @JoinColumn(name = "equipmentID", referencedColumnName = "equipmentID")
     private Equipment equipment;
 
-    public Product() {}
 
-    public int getProductId() {
-        return productId;
+    public Activity() {}
+
+
+    public int getActivityId() {
+        return activityId;
     }
 
-    public void setProductId(int productId) {
-        this.productId = productId;
+    public void setActivityId(int activityId) {
+        this.activityId = activityId;
     }
 
     public String getName() {

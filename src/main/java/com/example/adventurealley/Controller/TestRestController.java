@@ -1,19 +1,13 @@
 package com.example.adventurealley.Controller;
 
-import com.example.adventurealley.Models.Customer;
+import com.example.adventurealley.Models.*;
 import com.example.adventurealley.Models.Products.Equipment;
-import com.example.adventurealley.Models.Products.Product;
-import com.example.adventurealley.Models.Reservation;
-import com.example.adventurealley.Models.User;
-import com.example.adventurealley.Models.UserType;
-import com.example.adventurealley.Repositories.EquipmentRepo;
+import com.example.adventurealley.Models.Products.Activity;
 import com.example.adventurealley.Service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @CrossOrigin
 @RestController
@@ -22,7 +16,7 @@ public class TestRestController {
     @Autowired
     CustomerService customerService;
     @Autowired
-    ProductService productService;
+    ActivityService activityService;
     @Autowired
     ReservationService reservationService;
 
@@ -32,12 +26,16 @@ public class TestRestController {
     @Autowired
     EquipmentService equipmentService;
 
+    @Autowired
+    TimeSlotService timeSlotService;
+
     @GetMapping("/test")
     public ArrayList<Object> initData() {
         Customer customer = new Customer();
         Reservation reservation = new Reservation();
-        Product product = new Product();
+        Activity activity = new Activity();
         Equipment equipment = new Equipment();
+        TimeSlot timeSlot = new TimeSlot();
 
         User admin = new User();
         admin.setUsername("admin");
@@ -57,27 +55,35 @@ public class TestRestController {
         customer.setUsername("albert");
         customer.setPassword("1234");
 
+        timeSlot.setStartTime("12:00");
+        timeSlot.setEndTime("13:00");
+        timeSlot.setDate("2021-05-05");
 
-        reservation.setStartTime("12:00");
-        reservation.setEndTime("13:00");
-        reservation.setDate("2021-05-05");
 
         equipment.setName("Bungee Equipment");
         equipment.setStock(4);
 
-        product.setName("Bungee Jump");
-        product.setAgeLimit("18+");
-        product.setPrice(500.5);
-        product.setEquipment(equipment);
+        activity.setName("Bungee Jump");
+        activity.setAgeLimit("18+");
+        activity.setPrice(500.5);
+        equipmentService.equipmentRepo.save(equipment);
+        activity.setEquipment(equipment);
+
+        activityService.activityRepo.save(activity);
+
+        timeSlot.setActivity(activity);
+        timeSlotService.timeSlotRepo.save(timeSlot);
 
 
+        reservation.setInfo(timeSlot);
 
-        reservation.setProduct(product);
+
         reservation.setCustomer(customer);
 
-        equipmentService.equipmentRepo.save(equipment);
+
+
         customerService.customerRepo.save(customer);
-        productService.productRepo.save(product);
+
         userService.userRepo.save(admin);
         userService.userRepo.save(employee);
         reservationService.reservationRepo.save(reservation);
@@ -86,7 +92,7 @@ public class TestRestController {
 
         ArrayList<Object> objects = new ArrayList<>();
         objects.add(customer);
-        objects.add(product);
+        objects.add(activity);
         objects.add(reservation);
         objects.add(equipment);
         return objects;
@@ -105,8 +111,8 @@ public class TestRestController {
     }
 
     @GetMapping("/products")
-    public List<Product> products() {
-        return productService.productRepo.findAll();
+    public List<Activity> products() {
+        return activityService.activityRepo.findAll();
     }
 
     @PostMapping("/validateCustomerLogin")
@@ -134,6 +140,14 @@ public class TestRestController {
         return userService.findUserByUsername(username);
     }
 
+    @PostMapping("/createCustomer")
+    public void CreateCustomer(@RequestBody Customer customer) {
+        customerService.customerRepo.save(customer);
+    }
 
+    @PutMapping("/updateCustomer")
+    public void updateCustomer(@RequestBody Customer customer) {
+        customerService.customerRepo.save(customer);
+    }
 
 }
