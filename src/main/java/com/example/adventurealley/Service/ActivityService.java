@@ -10,4 +10,9 @@ public class ActivityService {
     @Autowired
     public ActivityRepo activityRepo;
 
+    public void deleteActivity(int id) {
+        System.out.println("JEg viriker");
+        activityRepo.deleteById(id);
+    }
+
 }
