@@ -1,11 +1,9 @@
 package com.example.adventurealley.Models;
 
 import com.example.adventurealley.Models.Products.Activity;
-import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import jakarta.persistence.*;
 
-import java.util.HashSet;
-import java.util.Set;
 
 @Entity
 @Table(name = "timeslot")
