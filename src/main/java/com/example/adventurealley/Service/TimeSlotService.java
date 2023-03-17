@@ -15,17 +15,29 @@ public class TimeSlotService {
   @Autowired
   public TimeSlotRepo timeSlotRepo;
 
-  public ArrayList<Integer> returnTimeSlotByActivity(int id) {
-    List<TimeSlot> TSRList;
-    TSRList = timeSlotRepo.findAll();
+  public ArrayList<TimeSlot> returnTimeSlotByActivity(int id) {
+    ArrayList<TimeSlot> TSRList;
+    TSRList = timeSlotRepo.findAllByActivityActivityId(id);
+
+    return TSRList;
+    /*
+
     ArrayList<Integer> TSRId = new ArrayList<>();
+
+    for (TimeSlot timeSlot : TSRList) {
+      TSRId.add(timeSlot.getTimeSlotId());
+    }
 
     for (int i = 0; i < TSRList.size(); i++) {
       if (TSRList.get(i).getActivity().getActivityId() == id) {
         TSRId.add(TSRList.get(i).getInfoId());
       }
     }
+
+
     return TSRId;
+
+     */
   }
 
   public void deleteTimeSlotByActivity(int id) {

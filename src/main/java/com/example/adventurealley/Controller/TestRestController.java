@@ -75,7 +75,7 @@ public class TestRestController {
         timeSlotService.timeSlotRepo.save(timeSlot);
 
 
-        reservation.setInfo(timeSlot);
+        reservation.setTimeSlot(timeSlot);
 
 
         reservation.setCustomer(customer);

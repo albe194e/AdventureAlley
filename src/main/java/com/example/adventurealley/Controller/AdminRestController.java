@@ -1,10 +1,12 @@
 package com.example.adventurealley.Controller;
 
+import com.example.adventurealley.Models.TimeSlot;
 import com.example.adventurealley.Models.User;
 import com.example.adventurealley.Service.ActivityService;
 import com.example.adventurealley.Service.ReservationService;
 import com.example.adventurealley.Service.TimeSlotService;
 import com.example.adventurealley.Service.UserService;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -26,13 +28,18 @@ public class AdminRestController {
     @Autowired
     ActivityService activityService;
 
+
     @DeleteMapping("/deleteActivity/{id}")
+    @Transactional
     public void deleteActivity(@PathVariable int id) {
-        ArrayList<Integer> timeSlotId;
+        ArrayList<TimeSlot> timeSlotId;
         timeSlotId = timeSlotService.returnTimeSlotByActivity(id);
-        for (int i = 0; i < timeSlotId.size(); i++) {
-            reservationService.deleteReservationByTimeSlot(timeSlotId.get(i));
+
+        for (TimeSlot timeSlot : timeSlotId) {
+
+            reservationService.deleteReservationByTimeSlot(timeSlot);
         }
+
         timeSlotService.deleteTimeSlotByActivity(id);
         activityService.deleteActivity(id);
     }

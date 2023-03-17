@@ -13,17 +13,17 @@ public class Reservation {
     private Customer customer;
 
     @OneToOne
-    @JoinColumn(name = "infoId", referencedColumnName = "infoId")
-    private TimeSlot info;
+    @JoinColumn(name = "timeSlotId", referencedColumnName = "timeSlotId")
+    private TimeSlot timeSlot;
 
 
 
-    public TimeSlot getInfo() {
-        return info;
+    public TimeSlot getTimeSlot() {
+        return timeSlot;
     }
 
-    public void setInfo(TimeSlot info) {
-        this.info = info;
+    public void setTimeSlot(TimeSlot info) {
+        this.timeSlot = info;
     }
 
     public Reservation() {}

@@ -14,7 +14,8 @@ public class ReservationService {
     @Autowired
     public ReservationRepo reservationRepo;
 
-    public void deleteReservationByTimeSlot(int id) {
+    public void deleteReservationByTimeSlot(TimeSlot timeSlot) {
+        /*
         List<Reservation> RList;
         RList = reservationRepo.findAll();
 
@@ -23,6 +24,10 @@ public class ReservationService {
                 reservationRepo.delete(RList.get(i));
             }
         }
+
+         */
+
+        reservationRepo.deleteAllByTimeSlot(timeSlot);
     }
 
 }

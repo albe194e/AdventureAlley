@@ -10,7 +10,7 @@ import jakarta.persistence.*;
 public class TimeSlot {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int infoId;
+    private int timeSlotId;
 
     @ManyToOne
     @JoinColumn(name = "activityId", referencedColumnName = "activityId")
@@ -22,12 +22,12 @@ public class TimeSlot {
         return activity;
     }
 
-    public int getInfoId() {
-        return infoId;
+    public int getTimeSlotId() {
+        return timeSlotId;
     }
 
-    public void setInfoId(int infoId) {
-        this.infoId = infoId;
+    public void setTimeSlotId(int infoId) {
+        this.timeSlotId = infoId;
     }
 
     public void setActivity(Activity activity) {
