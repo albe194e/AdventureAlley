@@ -101,12 +101,6 @@ public class TestRestController {
 
     }
 
-    @GetMapping("/users")
-    public List<User> users() {
-        return userService.userRepo.findAll();
-    }
-
-
     @GetMapping("/customers")
     public List<Customer> customers() {
         return customerService.customerRepo.findAll();
@@ -147,9 +141,13 @@ public class TestRestController {
         customerService.customerRepo.save(customer);
     }
 
-    @PutMapping("/updateCustomer")
-    public void updateCustomer(@RequestBody Customer customer) {
-        customerService.customerRepo.save(customer);
+    @PutMapping("/updateCustomer/{id}")
+    public void updateCustomer(@PathVariable int id, @RequestBody Customer customer) {
+        customerService.updateCustomer(id, customer);
     }
 
+    @DeleteMapping("/deleteCustomer/{id}")
+    public void deleteCustomer(@PathVariable int id) {
+        customerService.deleteCustomer(id);
+    }
 }

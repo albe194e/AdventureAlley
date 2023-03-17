@@ -6,20 +6,20 @@ import com.example.adventurealley.Service.ReservationService;
 import com.example.adventurealley.Service.TimeSlotService;
 import com.example.adventurealley.Service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
+import java.util.List;
 
 @CrossOrigin
 @RestController
 public class AdminRestController {
 
-
     @Autowired
     ReservationService reservationService;
     @Autowired
     TimeSlotService timeSlotService;
+
     @Autowired
     UserService userService;
 
@@ -36,6 +36,7 @@ public class AdminRestController {
         timeSlotService.deleteTimeSlotByActivity(id);
         activityService.deleteActivity(id);
     }
+
     @DeleteMapping("/deleteUser/{id}")
     public void deleteUser(@PathVariable int id) {
         userService.deleteUser(id);
@@ -50,7 +51,13 @@ public class AdminRestController {
     @PostMapping("/createUser")
     public void createUser(@RequestBody User user) {
 
+        System.out.println(user.getUsername());
+
         userService.createUser(user);
 
+    }
+    @GetMapping("/users")
+    public List<User> users() {
+        return userService.userRepo.findAll();
     }
 }

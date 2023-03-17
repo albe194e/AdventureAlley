@@ -1,10 +1,6 @@
 package com.example.adventurealley.Models.Products;
-
-import com.example.adventurealley.Models.Customer;
-import com.example.adventurealley.Models.TimeSlot;
 import jakarta.persistence.*;
 
-import java.sql.Time;
 
 @Entity
 public class Activity {
