@@ -44,6 +44,8 @@ public class AdminRestController {
         activityService.deleteActivity(id);
     }
 
+    @PutMapping("/updateActivity/{id}")
+
     @DeleteMapping("/deleteUser/{id}")
     public void deleteUser(@PathVariable int id) {
         userService.deleteUser(id);
