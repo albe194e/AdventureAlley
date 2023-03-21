@@ -150,4 +150,9 @@ public class TestRestController {
     public void deleteCustomer(@PathVariable int id) {
         customerService.deleteCustomer(id);
     }
+
+    @GetMapping("/customer/{id}")
+    public Customer getCustomer(@PathVariable int id) {
+        return customerService.customerRepo.findById(id).orElse(null);
+    }
 }

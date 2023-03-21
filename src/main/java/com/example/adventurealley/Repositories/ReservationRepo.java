@@ -9,4 +9,6 @@ import java.util.ArrayList;
 public interface ReservationRepo extends JpaRepository<Reservation,Integer> {
 
   void deleteAllByTimeSlot(TimeSlot timeSlot);
+
+    ArrayList<Reservation> findAllByCustomerCustomerId(int id);
 }

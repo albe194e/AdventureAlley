@@ -18,6 +18,7 @@ public class Reservation {
 
 
 
+
     public TimeSlot getTimeSlot() {
         return timeSlot;
     }
