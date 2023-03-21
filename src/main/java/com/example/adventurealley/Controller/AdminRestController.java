@@ -1,11 +1,10 @@
 package com.example.adventurealley.Controller;
 
+import com.example.adventurealley.Models.Products.Activity;
+import com.example.adventurealley.Models.Products.Equipment;
 import com.example.adventurealley.Models.TimeSlot;
 import com.example.adventurealley.Models.User;
-import com.example.adventurealley.Service.ActivityService;
-import com.example.adventurealley.Service.ReservationService;
-import com.example.adventurealley.Service.TimeSlotService;
-import com.example.adventurealley.Service.UserService;
+import com.example.adventurealley.Service.*;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -27,6 +26,9 @@ public class AdminRestController {
 
     @Autowired
     ActivityService activityService;
+
+    @Autowired
+    EquipmentService equipmentService;
 
 
     @DeleteMapping("/deleteActivity/{id}")
@@ -55,6 +57,7 @@ public class AdminRestController {
         userService.updateUser(id, updatedUser);
 
     }
+
     @PostMapping("/createUser")
     public void createUser(@RequestBody User user) {
 
@@ -63,8 +66,21 @@ public class AdminRestController {
         userService.createUser(user);
 
     }
+
     @GetMapping("/users")
     public List<User> users() {
         return userService.userRepo.findAll();
+    }
+
+
+    @PostMapping("/createActivity")
+    public void createActivity(@RequestBody Activity activity) {
+
+        activityService.activityRepo.save(activity);
+    }
+
+    @PostMapping("/createEquipment")
+    public void createEquipment(@RequestBody Equipment equipment){
+        equipmentService.equipmentRepo.save(equipment);
     }
 }

@@ -101,6 +101,11 @@ public class TestRestController {
 
     }
 
+    @GetMapping("/equipment")
+    public List<Equipment> equipment() {
+        return equipmentService.equipmentRepo.findAll();
+    }
+
     @GetMapping("/customers")
     public List<Customer> customers() {
         return customerService.customerRepo.findAll();
