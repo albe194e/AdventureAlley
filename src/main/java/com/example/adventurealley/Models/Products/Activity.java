@@ -20,6 +20,12 @@ public class Activity {
 
     public Activity() {}
 
+    public Activity(String name, String ageLimit, double price) {
+        this.name = name;
+        this.ageLimit = ageLimit;
+        this.price = price;
+    }
+
     public Activity(String name, String ageLimit, double price, Equipment equipment) {
         this.name = name;
         this.ageLimit = ageLimit;

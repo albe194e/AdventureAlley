@@ -28,7 +28,6 @@ public class TimeSlotGenerationREST {
 
         List<Activity> activities = activityService.activityRepo.findAll();
 
-
         return timeSlotService.generateTimeSlots(activities);
     }
 

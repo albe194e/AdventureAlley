@@ -43,4 +43,9 @@ public class ReservationService {
         reservationRepo.save(newReservation);
 
     }
+
+    public void deleteReservation(int id) {
+
+        reservationRepo.deleteById(id);
+    }
 }

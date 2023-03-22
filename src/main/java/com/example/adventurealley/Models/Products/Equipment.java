@@ -15,6 +15,12 @@ public class Equipment {
 
   public Equipment() {}
 
+
+    public Equipment(String name, int stock) {
+        this.name = name;
+        Stock = stock;
+    }
+
   public int getEquipmentID() {
     return equipmentID;
   }
