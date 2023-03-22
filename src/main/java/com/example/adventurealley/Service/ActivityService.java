@@ -7,6 +7,8 @@ import com.example.adventurealley.Repositories.ActivityRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 public class ActivityService {
 
@@ -25,6 +27,10 @@ public class ActivityService {
         activity.setAgeLimit(newA.getAgeLimit());
         activity.setPrice(newA.getPrice());
 
+    }
+
+    public Optional<Activity> getActivityById(int id) {
+        return activityRepo.findById(id);
     }
 
 

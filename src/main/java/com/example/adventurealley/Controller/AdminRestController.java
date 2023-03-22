@@ -31,8 +31,7 @@ public class AdminRestController {
     @Autowired
     ActivityService activityService;
 
-    @Autowired
-    EquipmentService equipmentService;
+
 
 
     @DeleteMapping("/deleteActivity/{id}")
@@ -52,7 +51,7 @@ public class AdminRestController {
 
     @PutMapping("/updateEquipment/{id}")
     public void updateEquipment(@PathVariable int id, @RequestBody Equipment updatedEquipment) {
-       newEquipment = equipmentService.updateEquipment(id, updatedEquipment);
+       equipmentService.updateEquipment(id, updatedEquipment);
     }
 
     @PutMapping("/updateActivity/{id}")
@@ -60,6 +59,10 @@ public class AdminRestController {
         activityService.updateActivity(id, updatedActivity);
     }
 
+    @GetMapping("/Activity{id}")
+    public Activity getActivity(@PathVariable int id) {
+        return activityService.getActivityById(id).orElse(null);
+    }
     @DeleteMapping("/deleteUser/{id}")
     public void deleteUser(@PathVariable int id) {
         userService.deleteUser(id);
