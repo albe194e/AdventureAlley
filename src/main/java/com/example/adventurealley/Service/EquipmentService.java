@@ -17,4 +17,9 @@ public class EquipmentService {
     equipment.setStock(newE.getStock());
     return equipment;
   }
+
+
+  public void saveEquipment(Equipment equipment) {
+    equipmentRepo.save(equipment);
+  }
 }

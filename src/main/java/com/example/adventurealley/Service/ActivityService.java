@@ -41,4 +41,7 @@ public class ActivityService {
 
     }
 
+    public void saveActivity(Activity activity) {
+        activityRepo.save(activity);
+    }
 }

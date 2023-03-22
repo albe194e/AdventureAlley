@@ -31,91 +31,72 @@ public class TestRestController {
 
     @GetMapping("/test")
     public ArrayList<Object> initData() {
-        Customer customer = new Customer();
-        Reservation reservation = new Reservation();
-        Activity activity = new Activity();
-        Equipment equipment = new Equipment();
-        TimeSlot timeSlot = new TimeSlot();
 
-        User admin = new User();
-        admin.setUsername("admin");
-        admin.setPassword("1234");
-        admin.setUserType(UserType.ADMIN);
+        //Instantiate customer
+        Customer customer = new Customer(
+                "William",
+                "Hansen",
+                "@gmail.com",
+                "12345678",
+                "Skovvejen 24",
+                "test",
+                "1234");
 
-        User employee = new User();
-        employee.setUsername("employee");
-        employee.setPassword("1234");
-        employee.setUserType(UserType.EMPLOYEE);
+        //Instantiate Users
+        User admin = new User("admin", "1234", UserType.ADMIN);
+        User employee = new User("employee", "1234", UserType.EMPLOYEE);
 
-        customer.setFirstName("Albert");
-        customer.setLastName("Einstein");
-        customer.setPhone("12345678");
-        customer.setEmail("gmail@");
-        customer.setAddress("Albertsvej 1");
-        customer.setUsername("albert");
-        customer.setPassword("1234");
+        userService.userRepo.save(admin);
+        userService.userRepo.save(employee);
 
-        timeSlot.setStartTime("12:00");
-        timeSlot.setEndTime("13:00");
-        timeSlot.setDate("2021-05-05");
+        //Instantiate activities
+        Activity gokart = new Activity("GoKart","12",200.0);
+        Activity minigolf = new Activity("MiniGolf","4",200.0);
+        Activity paintball = new Activity("Paintball","12",200.0);
+        Activity sumoWrestling = new Activity("SumoWrestling","5",200.0);
 
 
-        equipment.setName("Bungee Equipment");
-        equipment.setStock(4);
-
-        activity.setName("Bungee Jump");
-        activity.setAgeLimit("18+");
-        activity.setPrice(500.5);
-        equipmentService.equipmentRepo.save(equipment);
-        activity.setEquipment(equipment);
-
-        activityService.activityRepo.save(activity);
-
-        timeSlot.setActivity(activity);
-        timeSlotService.timeSlotRepo.save(timeSlot);
+        //Instantiate equipment
+        Equipment gokartEquipment = new Equipment("GoKart", 5);
+        Equipment minigolfEquipment = new Equipment("MiniGolf", 5);
+        Equipment paintballEquipment = new Equipment("Paintball", 5);
+        Equipment sumoWrestlingEquipment = new Equipment("SumoWrestling", 5);
 
 
-        reservation.setTimeSlot(timeSlot);
+        //Save activities and equipment
+        equipmentService.saveEquipment(gokartEquipment);
+        equipmentService.saveEquipment(minigolfEquipment);
+        equipmentService.saveEquipment(paintballEquipment);
+        equipmentService.saveEquipment(sumoWrestlingEquipment);
 
+        gokart.setEquipment(gokartEquipment);
+        minigolf.setEquipment(minigolfEquipment);
+        paintball.setEquipment(paintballEquipment);
+        sumoWrestling.setEquipment(sumoWrestlingEquipment);
 
-        reservation.setCustomer(customer);
-
+        activityService.saveActivity(gokart);
+        activityService.saveActivity(minigolf);
+        activityService.saveActivity(paintball);
+        activityService.saveActivity(sumoWrestling);
 
 
         customerService.customerRepo.save(customer);
 
 
-        userService.userRepo.save(admin);
-        userService.userRepo.save(employee);
-        reservationService.reservationRepo.save(reservation);
-
-
-
-
         ArrayList<Object> objects = new ArrayList<>();
+
         objects.add(customer);
-        objects.add(activity);
-        objects.add(reservation);
-        objects.add(equipment);
+        objects.add(activityService.activityRepo.findAll());
+        objects.add(equipmentService.equipmentRepo.findAll());
+
         return objects;
 
     }
 
-    @GetMapping("/equipment")
-    public List<Equipment> equipment() {
-        return equipmentService.equipmentRepo.findAll();
-    }
 
-    @GetMapping("/customers")
-    public List<Customer> customers() {
-        return customerService.customerRepo.findAll();
-    }
 
-    @GetMapping("/products")
-    public List<Activity> products() {
-        return activityService.activityRepo.findAll();
-    }
 
+    /*
     @PostMapping("/validateCustomerLogin")
     public boolean login(@RequestBody Customer customer) {
 
@@ -136,28 +117,9 @@ public class TestRestController {
 
         return userOptional.orElse(null);
     }
-    @GetMapping("/user/{username}")
-    public User getUser(@PathVariable String username) {
-        return userService.findUserByUsername(username);
-    }
 
-    @PostMapping("/createCustomer")
-    public void CreateCustomer(@RequestBody Customer customer) {
-        customerService.customerRepo.save(customer);
-    }
 
-    @PutMapping("/updateCustomer/{id}")
-    public void updateCustomer(@PathVariable int id, @RequestBody Customer customer) {
-        customerService.updateCustomer(id, customer);
-    }
+     */
 
-    @DeleteMapping("/deleteCustomer/{id}")
-    public void deleteCustomer(@PathVariable int id) {
-        customerService.deleteCustomer(id);
-    }
-
-    @GetMapping("/customer/{id}")
-    public Customer getCustomer(@PathVariable int id) {
-        return customerService.customerRepo.findById(id).orElse(null);
-    }
 }
+

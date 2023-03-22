@@ -34,6 +34,56 @@ public class AdminRestController {
 
 
 
+    //GET
+    @GetMapping("/users")
+    public List<User> users() {
+        return userService.userRepo.findAll();
+    }
+
+    @GetMapping("/equipment")
+    public List<Equipment> equipment() {
+        return equipmentService.equipmentRepo.findAll();
+    }
+
+
+    @GetMapping("/products")
+    public List<Activity> products() {
+        return activityService.activityRepo.findAll();
+    }
+
+
+    //POST / CREATE
+    @PostMapping("/createUser")
+    public void createUser(@RequestBody User user) {
+
+        System.out.println(user.getUsername());
+
+        userService.createUser(user);
+
+    }
+
+    @PostMapping("/createActivity")
+    public void createActivity(@RequestBody Activity activity) {
+
+        activityService.activityRepo.save(activity);
+    }
+
+
+    @PostMapping("/createEquipment")
+    public void createEquipment(@RequestBody Equipment equipment) {
+        equipmentService.equipmentRepo.save(equipment);
+    }
+
+
+    //PUT
+    @PutMapping("/updateUser/{id}")
+    public void updateUser(@PathVariable int id, @RequestBody User updatedUser) {
+
+        userService.updateUser(id, updatedUser);
+
+    }
+
+    //DELETE
     @DeleteMapping("/deleteActivity/{id}")
     @Transactional
     public void deleteActivity(@PathVariable int id) {
@@ -66,38 +116,5 @@ public class AdminRestController {
     @DeleteMapping("/deleteUser/{id}")
     public void deleteUser(@PathVariable int id) {
         userService.deleteUser(id);
-    }
-
-    @PutMapping("/updateUser/{id}")
-    public void updateUser(@PathVariable int id, @RequestBody User updatedUser) {
-
-        userService.updateUser(id, updatedUser);
-
-    }
-
-    @PostMapping("/createUser")
-    public void createUser(@RequestBody User user) {
-
-        System.out.println(user.getUsername());
-
-        userService.createUser(user);
-
-    }
-
-    @GetMapping("/users")
-    public List<User> users() {
-        return userService.userRepo.findAll();
-    }
-
-
-    @PostMapping("/createActivity")
-    public void createActivity(@RequestBody Activity activity) {
-
-        activityService.activityRepo.save(activity);
-    }
-
-    @PostMapping("/createEquipment")
-    public void createEquipment(@RequestBody Equipment equipment){
-        equipmentService.equipmentRepo.save(equipment);
     }
 }

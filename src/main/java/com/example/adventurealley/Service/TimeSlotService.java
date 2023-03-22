@@ -78,4 +78,13 @@ public class TimeSlotService {
 
         return timeSlotRepo.findById(id);
     }
+
+    public void changeTimeSlotToAvailable(int id) {
+
+
+
+        TimeSlot timeSlot = timeSlotRepo.findById(id).get();
+        timeSlot.setBooked(false);
+        timeSlotRepo.save(timeSlot);
+    }
 }
