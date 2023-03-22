@@ -101,6 +101,11 @@ public class TestRestController {
 
     }
 
+    @GetMapping("/equipment")
+    public List<Equipment> equipment() {
+        return equipmentService.equipmentRepo.findAll();
+    }
+
     @GetMapping("/customers")
     public List<Customer> customers() {
         return customerService.customerRepo.findAll();
@@ -149,5 +154,10 @@ public class TestRestController {
     @DeleteMapping("/deleteCustomer/{id}")
     public void deleteCustomer(@PathVariable int id) {
         customerService.deleteCustomer(id);
+    }
+
+    @GetMapping("/customer/{id}")
+    public Customer getCustomer(@PathVariable int id) {
+        return customerService.customerRepo.findById(id).orElse(null);
     }
 }

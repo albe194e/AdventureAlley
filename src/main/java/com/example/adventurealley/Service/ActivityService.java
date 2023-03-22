@@ -2,6 +2,7 @@ package com.example.adventurealley.Service;
 
 import com.example.adventurealley.Models.Products.Activity;
 import com.example.adventurealley.Models.Products.Equipment;
+import com.example.adventurealley.Models.Products.Activity;
 import com.example.adventurealley.Repositories.ActivityRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,6 +24,14 @@ public class ActivityService {
         activity.setName(newA.getName());
         activity.setAgeLimit(newA.getAgeLimit());
         activity.setPrice(newA.getPrice());
+
+    }
+
+
+    public boolean checkIfActivityExists(String activityName) {
+        Activity activity = activityRepo.findByName(activityName);
+
+        return activity != null;
 
     }
 

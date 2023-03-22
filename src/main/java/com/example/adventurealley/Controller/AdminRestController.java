@@ -31,7 +31,8 @@ public class AdminRestController {
     @Autowired
     ActivityService activityService;
 
-    Equipment newEquipment;
+    @Autowired
+    EquipmentService equipmentService;
 
 
     @DeleteMapping("/deleteActivity/{id}")
@@ -70,6 +71,7 @@ public class AdminRestController {
         userService.updateUser(id, updatedUser);
 
     }
+
     @PostMapping("/createUser")
     public void createUser(@RequestBody User user) {
 
@@ -78,8 +80,21 @@ public class AdminRestController {
         userService.createUser(user);
 
     }
+
     @GetMapping("/users")
     public List<User> users() {
         return userService.userRepo.findAll();
+    }
+
+
+    @PostMapping("/createActivity")
+    public void createActivity(@RequestBody Activity activity) {
+
+        activityService.activityRepo.save(activity);
+    }
+
+    @PostMapping("/createEquipment")
+    public void createEquipment(@RequestBody Equipment equipment){
+        equipmentService.equipmentRepo.save(equipment);
     }
 }

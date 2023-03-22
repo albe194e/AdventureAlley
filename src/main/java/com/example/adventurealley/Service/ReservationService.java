@@ -6,6 +6,7 @@ import com.example.adventurealley.Repositories.ReservationRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.sql.Time;
 import java.util.List;
 
 @Service
@@ -30,4 +31,16 @@ public class ReservationService {
         reservationRepo.deleteAllByTimeSlot(timeSlot);
     }
 
+    public void createReservation(Reservation reservation) {
+
+        Reservation newReservation = new Reservation();
+
+
+
+        newReservation.setCustomer(reservation.getCustomer());
+        newReservation.setTimeSlot(reservation.getTimeSlot());
+
+        reservationRepo.save(newReservation);
+
+    }
 }

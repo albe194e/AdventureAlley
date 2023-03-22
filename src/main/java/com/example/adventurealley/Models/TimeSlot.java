@@ -18,6 +18,16 @@ public class TimeSlot {
 
     private String date, startTime, endTime;
 
+    private boolean isBooked;
+
+    public boolean isBooked() {
+        return isBooked;
+    }
+
+    public void setBooked(boolean booked) {
+        isBooked = booked;
+    }
+
     public Activity getActivity() {
         return activity;
     }
