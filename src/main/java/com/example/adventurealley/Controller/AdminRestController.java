@@ -109,7 +109,7 @@ public class AdminRestController {
         activityService.updateActivity(id, updatedActivity);
     }
 
-    @GetMapping("/Activity{id}")
+    @GetMapping("/Activity/{id}")
     public Activity getActivity(@PathVariable int id) {
         return activityService.getActivityById(id).orElse(null);
     }
